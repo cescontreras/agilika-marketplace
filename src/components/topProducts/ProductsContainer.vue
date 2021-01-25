@@ -13,17 +13,32 @@
 					indeterminate
 				></v-progress-linear>
 			</template> -->
-
-			<v-img height="200" src="https://cdn.vuetifyjs.com/images/cards/cooking.png">
-				<v-icon class="fav-icon">mdi-heart-circle-outline</v-icon>
-			</v-img>
+			<v-hover v-slot="{ hover }">
+				<v-img
+					height="200"
+					src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+				>
+					<v-icon class="fav-icon">mdi-heart-circle-outline</v-icon>
+					<v-expand-transition>
+						<div
+							v-if="hover"
+							class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-2 white--text"
+							style="height: 100%;"
+						>
+							<v-btn depressed color="primary" @click="overlayOpen(item)" text>
+								Quick View
+							</v-btn>
+						</div>
+					</v-expand-transition>
+				</v-img>
+			</v-hover>
 
 			<v-card-title>{{ item.name }}</v-card-title>
 
 			<v-card-text>
 				<v-row align="center" class="mx-0">
 					<v-rating
-						:value="4.5"
+						:value="item.rating"
 						color="amber"
 						dense
 						half-increments
@@ -32,7 +47,7 @@
 					></v-rating>
 
 					<div class="grey--text ml-4">
-						4.5 (413)
+						{{ item.rating }}
 					</div>
 				</v-row>
 
@@ -44,73 +59,48 @@
 					Reserve
 				</v-btn>
 
-				<v-btn 
-				color="deep-purple lighten-2" 
-        @click="overlay = true"
-				text >
+				<v-btn color="deep-purple lighten-2" @click="overlayOpen(item)" text>
 					Ver Mas
 				</v-btn>
 			</v-card-actions>
 		</v-card>
-		<v-overlay
-      :z-index="zIndex"
-      :value="overlay"
-    >
-      <ProductQuick @overlayIsVisible="overlayIsVisible"/>
-    </v-overlay>
+		<v-overlay :z-index="zIndex" :value="overlay">
+			<ProductQuick @overlayIsVisible="overlayIsVisible" :product="product" />
+		</v-overlay>
 	</div>
 </template>
 
 <script>
 import ProductQuick from "./ProductQuick";
+import { mapState, mapActions } from "vuex";
 
 export default {
 	name: "ProductsContainer",
-	components:{
-		ProductQuick
+	components: {
+		ProductQuick,
 	},
 	data() {
 		return {
 			hover: false,
 			overlay: false,
-      zIndex: 0,
-			products: [
-				{
-					name: "taylor ce 114",
-					price: 1000,
-				},
-				{
-					name: "gibson",
-					price: 2000,
-				},
-				{
-					name: "fender",
-					price: 200,
-				},
-				{
-					name: "gibson",
-					price: 2000,
-				},
-				{
-					name: "fender",
-					price: 200,
-				},
-				{
-					name: "gibson",
-					price: 2000,
-				},
-				{
-					name: "fender",
-					price: 200,
-				},
-			],
+			zIndex: 0,
+			product: {},
 		};
 	},
-  methods: {
-    overlayIsVisible() {
-			this.overlay = !this.overlay
-		}
-  }
+	methods: {
+		overlayIsVisible() {
+			this.overlay = !this.overlay;
+		},
+		overlayOpen(item) {
+			console.log(item);
+
+			this.product = item;
+			this.overlay = !this.overlay;
+		},
+	},
+	computed: {
+		...mapState(["products"]),
+	},
 };
 </script>
 
@@ -129,5 +119,14 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
+}
+
+.v-card--reveal {
+	align-items: flex-end;
+	bottom: 0;
+	justify-content: center;
+	opacity: 0.3;
+	position: absolute;
+	width: 100%;
 }
 </style>
