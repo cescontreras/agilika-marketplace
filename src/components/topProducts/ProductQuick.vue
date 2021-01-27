@@ -48,7 +48,7 @@ export default {
 		emitVisibleOverlay() {
 			this.$emit("overlayIsVisible");
 		},
-	}
+	},
 };
 </script>
 
@@ -58,11 +58,11 @@ export default {
 	height: 50vh;
 	background-color: rgb(220, 220, 220);
 
-  border: solid black 0.5px;
-  border-radius: 10px;
+	border: solid black 0.5px;
+	border-radius: 10px;
 }
 img {
-  border-radius: 10px;
+	border-radius: 10px;
 }
 
 .top {
@@ -82,8 +82,8 @@ img {
 }
 
 .add-basket {
-  width: fit-content;
-  align-self: center;
-  justify-self: flex-end;
+	width: fit-content;
+	align-self: center;
+	justify-self: flex-end;
 }
 </style>

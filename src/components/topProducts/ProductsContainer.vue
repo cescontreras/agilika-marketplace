@@ -19,6 +19,7 @@
 					src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
 				>
 					<v-icon class="fav-icon">mdi-heart-circle-outline</v-icon>
+
 					<v-expand-transition>
 						<div
 							v-if="hover"
@@ -56,12 +57,13 @@
 
 			<v-card-actions>
 				<v-btn color="deep-purple lighten-2" text>
-					Reserve
+					Basket
 				</v-btn>
-
-				<v-btn color="deep-purple lighten-2" @click="overlayOpen(item)" text>
-					Ver Mas
-				</v-btn>
+				<router-link :to="`/product/${item.id}`">
+					<v-btn color="deep-purple lighten-2" text>
+						Ver Mas
+					</v-btn>
+				</router-link>
 			</v-card-actions>
 		</v-card>
 		<v-overlay :z-index="zIndex" :value="overlay">
