@@ -80,6 +80,7 @@ export default {
 	width: 50%;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-evenly;
 }
 
 .buttons {

@@ -1,16 +1,32 @@
 <template>
 	<div class="main-basket d-flex">
-		<div class="list-items"></div>
-		<div class="basket-data"></div>
+		<div class="main-list">
+			<div
+				v-for="(item, index) in products"
+				:key="index"
+				class="list-items d-flex"
+			>
+				<BasketItem :item="item" />
+			</div>
+		</div>
+		<div class="basket-data">
+			<BasketOrder />
+		</div>
 	</div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import BasketItem from "../components/basket/BasketItem";
+import BasketOrder from "../components/basket/BasketOrder";
+
 export default {
-	data() {
-		return {
-			products: [],
-		};
+	components: {
+		BasketItem,
+		BasketOrder,
+	},
+	computed: {
+		...mapState(["products"]),
 	},
 };
 </script>
@@ -18,14 +34,25 @@ export default {
 <style scoped>
 .main-basket {
 	width: 100%;
+	flex-direction: row;
+	background-color: rgb(218, 218, 218);
 }
+.main-list {
+	width: 70%;
+}
+
 .list-items {
-	width: 75%;
-	background-color: yellow;
+	margin: 10px;
+	/* width: 70%; */
+	background-color: white;
+	flex-direction: column;
+	padding: 12px;
+	border: #888 solid 0.5px;
+	border-radius: 10px;
 }
 
 .basket-data {
-	width: 25%;
-	background-color: violet;
+	width: 30%;
+	height: 40vh;
 }
 </style>

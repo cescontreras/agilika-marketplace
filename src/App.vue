@@ -7,7 +7,7 @@
     </div>
     <router-view/> -->
 			<Header />
-			<div class="container">
+			<div class="ml-4 mr-4 mt-6">
 				<router-view />
 			</div>
 		</v-app>
@@ -45,4 +45,6 @@ export default {
 #nav a.router-link-exact-active {
 	color: #42b983;
 }
+
+
 </style>

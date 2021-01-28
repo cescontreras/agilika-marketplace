@@ -2,7 +2,7 @@
 	<div class="home">
 		<Carousel />
 		<div class="my-6">
-			<h1 align="start">Top Products</h1>
+			<h1 align="start" class="ml-16">Top Products</h1>
 			<ProductsContainer />
 		</div>
 		<v-banner class="banner">
