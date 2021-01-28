@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Carousel from "../components/Carousel";
 import ProductsContainer from "../components/topProducts/ProductsContainer";
 
@@ -24,6 +25,12 @@ export default {
 		Carousel,
 		ProductsContainer,
 	},
+	methods: {
+		...mapActions(['getProducts'])
+	},
+	created() {
+		this.getProducts()
+	}
 };
 </script>
 
