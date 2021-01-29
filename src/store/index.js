@@ -8,6 +8,7 @@ export default new Vuex.Store({
 	state: {
 		products: data,
 		product: {},
+		categories: []
 	},
 	mutations: {
 		getProducts(state, payload) {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
 		getProduct(state, payload) {
 			state.product = payload;
 		},
+		getCategories(state, payload) {
+			state.categories = payload
+		}
 	},
 	actions: {
 		getProducts({ commit }){
@@ -23,8 +27,6 @@ export default new Vuex.Store({
 			db.collection('products').get()
 				.then((res) => {
 					res.forEach(doc => {
-						console.log(doc.id);
-						console.log(doc.data());
 						let product = doc.data()
 						product.id = doc.id
 						products.push(product)
@@ -32,11 +34,53 @@ export default new Vuex.Store({
 					commit('getProducts', products)
 				})
 		},
-		getProduct({ commit, state }, id) {
-			//Pedido a la Api del producto
-			const product = state.products.filter((p) => p.id === id);
-
-			commit("getProduct", product[0]);
+		async getProduct({ commit }, id) {
+			let product = {}
+			await db.collection('products').doc(id).get()
+				.then(doc => {		
+					product = doc.data();
+					product.id = doc.id;
+				})
+				commit("getProduct", product);
+		},
+		editProduct({commit}, product){
+      db.collection('products').doc(product.id).update(product)
+      .then(()=>{
+				console.log('Product updated');
+				
+      })
+		},
+		addProduct({commit}, product){
+      db.collection('products').add(product)
+      .then(doc => {
+        console.log(doc.id);
+      })
+		},
+		deleteProduct({commit, dispatch}, id){
+      db.collection('products').doc(id).delete()
+      .then(()=>{
+        console.log('Product succesfully deleted');
+        // dispatch('getTareas')
+        commit('eliminarTarea',id)
+      })
+		},
+		addCategory({}, category){
+      db.collection('categories').add(category)
+      .then(doc => {
+        console.log(doc.id);
+      })
+		},
+		getCategories({ commit }){
+			const categories = []
+			db.collection('categories').get()
+				.then((res) => {
+					res.forEach(doc => {
+						let category = doc.data()
+						category.id = doc.id
+						categories.push(category)
+					})
+					commit('getCategories', categories)
+				})
 		},
 	},
 	modules: {},

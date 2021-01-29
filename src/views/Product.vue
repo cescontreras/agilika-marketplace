@@ -41,23 +41,25 @@ import { mapActions, mapState } from "vuex";
 export default {
 	data() {
 		return {
-			product: {},
+			id: this.$route.params.id
 		};
 	},
 	computed: {
+		...mapState(["product"]),
 		...mapState(["products"]),
 	},
 	methods: {
 		// ...mapActions(['getProduct'])
-		getProduct() {
-			//doble igual para match sin tipo de datos
-			const product = this.products.filter((p) => p.id == this.$route.params.id);
+		// getProduct() {
+		// 	//doble igual para match sin tipo de datos
+		// 	const product = this.products.filter((p) => p.id == this.$route.params.id);
 
-			this.product = product[0];
-		},
+		// 	this.product = product[0];
+		// },
+		...mapActions(['getProduct'])
 	},
 	created() {
-		this.getProduct();
+		this.getProduct(this.id);			
 	},
 };
 </script>

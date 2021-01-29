@@ -26,10 +26,11 @@ export default {
 		ProductsContainer,
 	},
 	methods: {
-		...mapActions(['getProducts'])
+		...mapActions(['getProducts', 'getCategories'])
 	},
 	created() {
 		this.getProducts()
+		this.getCategories()
 	}
 };
 </script>

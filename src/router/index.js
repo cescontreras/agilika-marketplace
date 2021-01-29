@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Product from "../views/Product.vue";
 import Basket from "../views/Basket";
+import ProductForm from "../views/ProductForm";
+import CategoryForm from "../views/CategoryForm";
 
 Vue.use(VueRouter);
 
@@ -21,6 +23,16 @@ const routes = [
 		path: "/basket",
 		name: "Basket",
 		component: Basket,
+	},
+	{
+		path: "/form",
+		name: "ProductForm",
+		component: ProductForm,
+	},
+	{
+		path: "/categoryform",
+		name: "CategoryForm",
+		component: CategoryForm,
 	},
 	// {
 	// path: '/about',

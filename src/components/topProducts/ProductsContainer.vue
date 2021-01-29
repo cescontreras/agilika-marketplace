@@ -94,8 +94,6 @@ export default {
 			this.overlay = !this.overlay;
 		},
 		overlayOpen(item) {
-			console.log(item);
-
 			this.product = item;
 			this.overlay = !this.overlay;
 		},

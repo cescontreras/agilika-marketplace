@@ -37,9 +37,12 @@
 		</div>
 
 		<div class="bottom-bar d-flex">
+			<router-link to="/form">FORM</router-link>
+			<router-link to="/categoryform">CATFORM</router-link>
+
 			<ul class="bottom-bar d-flex">
 				<li v-for="(item, index) in categories" :key="index">
-					{{ item }}
+					{{ item.name }}
 				</li>
 			</ul>
 		</div>
@@ -47,13 +50,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
 	name: "Header",
 	data() {
 		return {
-			categories: ["Taylor", "Gibson", "Yamaha", "Fender", "Takamine"],
 		};
 	},
+	computed: {
+		...mapState(['categories'])
+	}
 };
 </script>
 

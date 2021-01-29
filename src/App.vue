@@ -16,10 +16,18 @@
 
 <script>
 import Header from "./views/Header";
+import { mapActions } from 'vuex';
 
 export default {
 	components: {
 		Header,
+	},
+	methods: {
+		...mapActions(["getProducts", "getCategories"]),
+	},
+	created() {
+		this.getProducts();
+		this.getCategories();
 	},
 };
 </script>
@@ -45,6 +53,4 @@ export default {
 #nav a.router-link-exact-active {
 	color: #42b983;
 }
-
-
 </style>
