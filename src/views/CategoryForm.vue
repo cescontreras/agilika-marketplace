@@ -1,7 +1,8 @@
 <template>
-	<div class="container crud-producto">
-		<v-form @submit.prevent="submit" ref="form" v-model="valid" lazy-validation>
+	<div class="crud-category">
+		<v-form @submit.prevent="submit" ref="form" v-model="valid" lazy-validation class="form-category container">
 			<v-text-field
+
 				v-model="name"
 				:counter="10"
 				:rules="nameRules"
@@ -61,7 +62,11 @@ export default {
 </script>
 
 <style>
-.crud-producto {
-	width: 50%;
+.crud-category {
+	width: 75%;
+	align-items: center;
+
 }
+
+
 </style>

@@ -5,6 +5,8 @@ import Product from "../views/Product.vue";
 import Basket from "../views/Basket";
 import ProductForm from "../views/ProductForm";
 import CategoryForm from "../views/CategoryForm";
+import SignIn from "../views/SignIn";
+import LogIn from "../views/Login";
 
 Vue.use(VueRouter);
 
@@ -33,6 +35,16 @@ const routes = [
 		path: "/categoryform",
 		name: "CategoryForm",
 		component: CategoryForm,
+	},
+	{
+		path: "/signin",
+		name: "SignIn",
+		component: SignIn,
+	},
+	{
+		path: "/login",
+		name: "LogIn",
+		component: LogIn,
 	},
 	// {
 	// path: '/about',

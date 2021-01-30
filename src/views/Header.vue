@@ -7,7 +7,13 @@
 				</span>
 				<v-spacer></v-spacer>
 				<v-icon>mdi-login</v-icon>
-				<span>Log in</span>
+				<router-link to="/login">
+					<span class="mr-4">Log in</span>
+				</router-link>
+
+				<router-link to="/signin">
+					<span>Sign in</span>
+				</router-link>
 			</v-system-bar>
 		</div>
 
@@ -50,16 +56,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 export default {
 	name: "Header",
 	data() {
-		return {
-		};
+		return {};
 	},
 	computed: {
-		...mapState(['categories'])
-	}
+		...mapState(["categories"]),
+	},
 };
 </script>
 
