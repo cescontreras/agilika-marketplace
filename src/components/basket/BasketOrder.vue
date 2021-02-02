@@ -9,41 +9,44 @@
 		</div>
 		<div class="buttons mt-8">
 			<v-btn>Shop More</v-btn>
-			<v-btn>Checkout</v-btn>
+			<v-btn @click="createOrder">Checkout</v-btn>
 		</div>
 	</div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from "vuex";
 export default {
-  data:{
-    total: 0
-  },
-  computed:{
-    ...mapState(['products'])
-  },
-  methods: {
-    calculate() {
-      const total = this.products.reduce((acc, el) => {
-        acc = acc + parseInt(el.price)
-        return acc
-      }, 0)
-      this.total = total
-    }
-  },
-  created() {
-    this.calculate()
-  }
+	data() {
+		return {
+			total: 0,
+		};
+	},
+	computed: {
+		...mapState(["products"]),
+	},
+	methods: {
+		calculate() {
+			const total = this.products.reduce((acc, el) => {
+				acc = acc + parseInt(el.price);
+				return acc;
+			}, 0);
+			this.total = total;
+		},
+		...mapActions(["createOrder"]),
+	},
+	created() {
+		this.calculate();
+	},
 };
 </script>
 
 <style scoped>
 .basket {
-  background-color: white;
-  border-radius: 10px;
-  margin-top: 10px;
-  height: 100%;
+	background-color: white;
+	border-radius: 10px;
+	margin-top: 10px;
+	height: 100%;
 }
 
 h3 {
@@ -51,7 +54,7 @@ h3 {
 }
 
 .buttons {
-  display: flex;
-  justify-content: space-evenly;
+	display: flex;
+	justify-content: space-evenly;
 }
 </style>

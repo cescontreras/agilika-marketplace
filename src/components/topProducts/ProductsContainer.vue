@@ -56,7 +56,7 @@
 			</v-card-text>
 
 			<v-card-actions>
-				<v-btn color="deep-purple lighten-2" text>
+				<v-btn color="deep-purple lighten-2" text @click="addToCart(item)">
 					Basket
 				</v-btn>
 				<router-link :to="`/product/${item.id}`">
@@ -87,6 +87,11 @@ export default {
 			overlay: false,
 			zIndex: 0,
 			product: {},
+			order: {
+				userID: null,
+				products: [],
+				price: 0
+			}
 		};
 	},
 	methods: {
@@ -99,8 +104,11 @@ export default {
 		},
 	},
 	computed: {
-		...mapState(["products"]),
+		...mapState(["products", "cartId"]),
 	},
+	methods: {
+		...mapActions(["createOrder", "addToCart"])
+	}
 };
 </script>
 

@@ -2,7 +2,7 @@
 	<div class="main-basket d-flex">
 		<div class="main-list">
 			<div
-				v-for="(item, index) in products"
+				v-for="(item, index) in cart.products"
 				:key="index"
 				class="list-items d-flex"
 			>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import BasketItem from "../components/basket/BasketItem";
 import BasketOrder from "../components/basket/BasketOrder";
 
@@ -26,8 +26,14 @@ export default {
 		BasketOrder,
 	},
 	computed: {
-		...mapState(["products"]),
+		...mapState(["user", "cart"]),
 	},
+	methods: {
+		...mapActions(['getCart', 'createOrder'])
+	},
+	created(){
+		// this.getCart()
+	}
 };
 </script>
 
